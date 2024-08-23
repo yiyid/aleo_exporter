@@ -21,7 +21,7 @@ jobs:
 
     - name: Build
       run: |
-        GOOS=linux GOARCH=amd64 go build -o aleo_exporter
+        CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o aleo_exporter
 
     - name: Create Release
       id: create_release
@@ -30,7 +30,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        release_name: ${{ github.ref }}
         draft: false
         prerelease: false
 
